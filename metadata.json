@@ -1,0 +1,5 @@
+{
+  "name": "PDFCleaner",
+  "description": "Herramienta profesional para eliminar gráficos, imágenes y vectores de archivos PDF manteniendo el texto intacto.",
+  "requestFramePermissions": []
+}
