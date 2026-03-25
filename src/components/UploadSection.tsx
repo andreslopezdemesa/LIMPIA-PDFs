@@ -109,7 +109,23 @@ export const UploadSection: React.FC = () => {
               <p className="text-gray-500 mb-8">Se han eliminado todos los gráficos de "{fileName}"</p>
               
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <button className="bg-blue-600 text-white px-8 py-4 rounded-2xl font-bold hover:bg-blue-700 transition-all flex items-center justify-center gap-2 shadow-lg shadow-blue-200">
+                <button 
+                  onClick={() => {
+                    if (!fileName) return;
+                    // Simulación de descarga de archivo procesado
+                    const dummyContent = "PDFCleaner: Este es un simulacro de su archivo PDF procesado.\nEn una versión de producción, aquí se entregaría el archivo original sin gráficos.";
+                    const blob = new Blob([dummyContent], { type: 'application/pdf' });
+                    const url = URL.createObjectURL(blob);
+                    const link = document.createElement('a');
+                    link.href = url;
+                    link.download = fileName.replace(/\.pdf$/i, '') + '_cleaned.pdf';
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                    URL.revokeObjectURL(url);
+                  }}
+                  className="bg-blue-600 text-white px-8 py-4 rounded-2xl font-bold hover:bg-blue-700 transition-all flex items-center justify-center gap-2 shadow-lg shadow-blue-200"
+                >
                   <FileText size={20} />
                   Descargar PDF limpio
                 </button>
